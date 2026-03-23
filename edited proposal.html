@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My love ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="floating-hearts" id="floating-hearts"></div>
+
+    <div id="glass-container">
+        <div id="proposal-content">
+            <h1>My Dearest Bangaram</h1>
+            <p>"Every love story is beautiful, but ours is my favourite... will you be mine forever?" </p>
+            <div class="buttons">
+                <button id="yes-btn">YES! 💖</button>
+                <button id="no-btn">No 😢</button>
+            </div>
+        </div>
+
+        <div id="success-message">
+            <div class="heart">❤️</div>
+            <h1>Love you Bangaram 💖</h1>
+
+            <!-- Native HTML5 audio will be dynamically injected here on click -->
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Trust & Communication</h3>
+                    <p>Distance only makes us stronger because our foundation is built on endless, honest conversations
+                        and a trust that spans across the miles.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Virtual Dates</h3>
+                    <p>Daily texts and watching each other in video calls, every pixel of our
+                        shared screen time is a memory I cherish.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Why I Love You</h3>
+                    <p>I love everything about you—your smile,your voice,your laugh,your eyes,your beautiful soul. The
+                        miles between us
+                        could never change who you are to me: my whole world.</p>
+                </div>
+            </div>
+            <div class="image-container">
+                <!-- You can change the src attribute to the exact image filename you want to display -->
+                <img src="chinni_1.jpeg" alt="My Beautiful Love" class="styled-image">
+            </div>
+
+            <div class="surprise-container"
+                style="margin-top: 40px; animation: fadeIn 2s ease 1s forwards; opacity: 0; padding-bottom: 20px;">
+                <button id="surprise-btn">Click for surprise! 🎁</button>
+            </div>
+
+            <!-- Conclusion Highlight -->
+            <div
+                style="margin-top: 10px; padding: 20px; background: rgba(255, 255, 255, 0.85); border-radius: 12px; border: 1px solid #ffb199; animation: fadeIn 2s ease 1.5s forwards; opacity: 0; box-shadow: 0 4px 15px rgba(255, 177, 153, 0.3);">
+                <h3
+                    style="color: #d81b60; font-family: 'Dancing Script', cursive; font-size: 2.2rem; margin-bottom: 5px;">
+                    Conclusion ❤️</h3>
+                <p style="font-size: 1.1rem; color: #444; font-style: italic; margin-bottom: 0; font-weight: 600;">
+                    "Regarding our one year journey it is my presentation for you with lots of love chinnoda(Bangaram)"
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Surprise Modal -->
+    <div id="surprise-modal">
+        <div class="modal-content">
+            <div class="close-modal" id="close-modal">&times;</div>
+            <h2 style="font-family: 'Dancing Script', cursive; color: #d81b60; font-size: 2.5rem; margin-bottom: 20px;">
+                Just For You! ❤️</h2>
+            <div style="border-radius: 12px; overflow: hidden; position: relative; width: 100%; padding-bottom: 100%;">
+                <iframe src="https://tenor.com/embed/24923491"
+                    style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                    allowFullScreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create floating background hearts
+        const container = document.getElementById('floating-hearts');
+        const heartSymbols = ['❤️', '💖', '💕', '💗'];
+        for (let i = 0; i < 25; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            heart.style.fontSize = (Math.random() * 25 + 10) + 'px';
+            container.appendChild(heart);
+        }
+
+        // Create continuous falling pink hearts in the background
+        setInterval(() => {
+            const drop = document.createElement('div');
+            drop.classList.add('pink-shower-heart');
+            drop.innerHTML = ['💕', '💞', '💓', '💗', '💖', '💘', '❤️'][Math.floor(Math.random() * 7)];
+            drop.style.left = Math.random() * 100 + 'vw';
+            drop.style.animationDuration = (Math.random() * 5 + 4) + 's';
+            drop.style.fontSize = (Math.random() * 15 + 10) + 'px'; // slightly smaller
+            drop.style.zIndex = '0'; // Keep them strictly in the background
+
+            const drift = Math.random() > 0.5 ? 1 : -1;
+            drop.style.marginLeft = (drift * Math.random() * 50) + 'px';
+
+            document.body.appendChild(drop);
+
+            // Allow enough time for them to fall past the screen before cleaning up
+            setTimeout(() => drop.remove(), 9000);
+        }, 400); // Rains a new heart every 400ms
+
+        const noBtn = document.getElementById('no-btn');
+        const yesBtn = document.getElementById('yes-btn');
+        const proposalContent = document.getElementById('proposal-content');
+        const successMessage = document.getElementById('success-message');
+
+        const moveNoButton = () => {
+            // Get available window dimensions
+            const maxX = window.innerWidth - noBtn.offsetWidth - 30;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 30;
+
+            // Calculate random positions
+            const randomX = Math.max(10, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(10, Math.floor(Math.random() * maxY));
+
+            // Apply new position
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+
+            // Add playful taunts to play more with the user
+            const taunts = ["Nope! 😜", "Too slow! 🐢", "Catch me! 🏃", "Nice try! 😂", "Almost! 🤭", "Over here! 👋"];
+            noBtn.innerText = taunts[Math.floor(Math.random() * taunts.length)];
+
+            // Reset the text back after a moment so they don't give up
+            setTimeout(() => {
+                if (noBtn.style.display !== 'none') {
+                    noBtn.innerText = "No 😢";
+                }
+            }, 1200);
+        };
+
+        // Move the "No" button on hover
+        noBtn.addEventListener('mouseover', moveNoButton);
+
+        // Also move it on touch (for mobile devices)
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Prevent the actual click event that might follow
+            moveNoButton();
+        }, { passive: false });
+
+        // Function to trigger the huge pink heart shower
+        const triggerPinkShower = () => {
+            // Drop 150 pink hearts in sequence
+            for (let i = 0; i < 150; i++) {
+                setTimeout(() => {
+                    const drop = document.createElement('div');
+                    drop.classList.add('pink-shower-heart');
+                    // Pick from various pink heart symbols
+                    drop.innerHTML = ['💕', '💞', '💓', '💗', '💖', '💘'][Math.floor(Math.random() * 6)];
+
+                    // Randomize position across the full viewport width
+                    drop.style.left = Math.random() * 100 + 'vw';
+
+                    // Vary fall durations between 3s and 6s
+                    drop.style.animationDuration = (Math.random() * 3 + 3) + 's';
+
+                    // Vary sizes
+                    drop.style.fontSize = (Math.random() * 20 + 20) + 'px';
+
+                    // Small random drift left/right using margin
+                    const drift = Math.random() > 0.5 ? 1 : -1;
+                    drop.style.marginLeft = (drift * Math.random() * 70) + 'px';
+
+                    document.body.appendChild(drop);
+
+                    // Clean up from the DOM after the animation completes
+                    setTimeout(() => drop.remove(), 6500);
+                }, i * 35); // Stagger the drops over ~5+ seconds
+            }
+        };
+
+        // Handle the "Yes" button click
+        yesBtn.addEventListener('click', () => {
+            proposalContent.style.display = 'none';
+            successMessage.style.display = 'block';
+            noBtn.style.display = 'none'; // hide the wandering no button entirely
+            triggerPinkShower(); // Trigger the pink shower effect upon accepting
+
+            // Build a 100% reliable native HTML5 Audio element for background music
+            let bgmAudio = document.getElementById('neeve-song-audio');
+            if (!bgmAudio) {
+                // Direct high-quality preview of "Neeve" from "Darling"
+                bgmAudio = new Audio('https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/9e/2d/94/9e2d94c5-12c4-77f9-eb8e-cdd48af12551/mzaf_4059053770219182473.plus.aac.p.m4a');
+                bgmAudio.id = 'neeve-song-audio';
+                bgmAudio.loop = true;
+
+                // Add to document
+                document.body.appendChild(bgmAudio);
+            }
+
+            // Play it gracefully
+            bgmAudio.play().catch(e => console.log('BGM Play Error:', e));
+        });
+
+        // Handle the Surprise button click
+        const surpriseBtn = document.getElementById('surprise-btn');
+        const surpriseModal = document.getElementById('surprise-modal');
+        const closeModal = document.getElementById('close-modal');
+
+        if (surpriseBtn) {
+            surpriseBtn.addEventListener('click', () => {
+                // Show modal
+                surpriseModal.style.display = 'flex';
+
+                // Heart explosion surprise effect!
+                for (let i = 0; i < 60; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.classList.add('floating-heart');
+                        heart.innerHTML = ['❤️', '💖', '💕', '💗', '🎁', '✨', '🌹'][Math.floor(Math.random() * 7)];
+                        heart.style.left = Math.random() * 100 + 'vw';
+
+                        heart.style.animationDelay = '0s';
+                        heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                        heart.style.fontSize = (Math.random() * 30 + 15) + 'px';
+                        container.appendChild(heart);
+
+                        // Clean up
+                        setTimeout(() => heart.remove(), 5000);
+                    }, i * 40);
+                }
+            });
+        }
+
+        if (closeModal) {
+            closeModal.addEventListener('click', () => {
+                surpriseModal.style.display = 'none';
+            });
+            // Also close if clicked outside the modal content
+            window.addEventListener('click', (e) => {
+                if (e.target === surpriseModal) {
+                    surpriseModal.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
